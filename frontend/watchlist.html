@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watchlist — RiskLens-AI</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+</head>
+
+<body>
+  <div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-logo">
+          <span class="logo-icon">📈</span>
+          RiskLens-AI
+        </a>
+      </div>
+      
+      <div class="sidebar-menu">
+        <a href="/dashboard.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Dashboard
+        </a>
+        <a href="/watchlist.html" class="menu-item active">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Watchlist
+        </a>
+        <a href="/news.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l6 6v10a2 2 0 0 1-2 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          News
+        </a>
+        <a href="/profile.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          Settings
+        </a>
+        <a href="/admin.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+          Admin
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="upgrade-card">
+          <h4>Upgrade AI 🧠</h4>
+          <p>Unlock pro forecasting</p>
+          <button class="btn btn-primary w-full btn-sm">Try Now</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="main-wrapper">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <!-- Optional local search or breadcrumb could go here -->
+          <div style="font-weight: 600; font-size: 18px;">Portfolio & Watchlist</div>
+        </div>
+        <div class="topbar-right">
+          <div class="nav-avatar" onclick="window.location.href='/profile.html'"><span id="nav-initials">U</span></div>
+          <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        
+        <div class="dashboard-header">
+          <h1>⭐ Your Watchlist</h1>
+        </div>
+    
+        <div class="glass-card mb-3">
+          <table class="data-table" id="watchlist-table">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Price</th>
+                <th>Change</th>
+                <th>52W High</th>
+                <th>52W Low</th>
+                <th>Signal</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="watchlist-tbody">
+              <tr>
+                <td colspan="7" style="text-align:center; padding:40px;">
+                  <div class="loading-spinner"></div>
+                  <p class="loading-text mt-2">Loading watchlist...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+        <div class="dashboard-header mt-4">
+          <h1>💼 Portfolio</h1>
+          <button class="btn btn-primary btn-sm" onclick="showAddPortfolio()">+ Add Position</button>
+        </div>
+    
+        <div id="portfolio-modal" class="glass-card mb-3" style="display:none;">
+          <h3 style="font-weight:700; margin-bottom:16px;">Add Position</h3>
+          <form id="portfolio-form" style="display:flex; gap:12px; flex-wrap:wrap; align-items:end;">
+            <div class="input-group" style="flex:1; min-width:120px;">
+              <label for="port-ticker">Ticker</label>
+              <input type="text" id="port-ticker" class="input-field" placeholder="AAPL" required>
+            </div>
+            <div class="input-group" style="flex:1; min-width:120px;">
+              <label for="port-shares">Shares</label>
+              <input type="number" id="port-shares" class="input-field" placeholder="10" min="0.01" step="any" required>
+            </div>
+            <div class="input-group" style="flex:1; min-width:120px;">
+              <label for="port-price">Buy Price ($)</label>
+              <input type="number" id="port-price" class="input-field" placeholder="150.00" min="0.01" step="any" required>
+            </div>
+            <button type="submit" class="btn btn-green btn-sm">Add</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="hideAddPortfolio()">Cancel</button>
+          </form>
+        </div>
+    
+        <div class="glass-card">
+          <table class="data-table" id="portfolio-table">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Shares</th>
+                <th>Buy Price</th>
+                <th>Current Price</th>
+                <th>P&L</th>
+                <th>P&L %</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="portfolio-tbody">
+              <tr>
+                <td colspan="7" style="text-align:center; padding:40px;">
+                  <div class="empty-icon" style="font-size:48px;">💼</div>
+                  <p class="text-muted mt-1">No positions yet. Add your first trade above.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="portfolio-summary" style="display:none; padding:16px; border-top:1px solid var(--border-glass);">
+            <div style="display:flex; justify-content:space-between; font-weight:700;">
+              <span>Total P&L</span>
+              <span id="total-pnl">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="js/common.js"></script>
+  <script src="js/watchlist.js"></script>
+</body>
+</html>

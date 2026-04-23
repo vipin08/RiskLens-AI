@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign up for InvestAI — Startup Investment Platform">
+  <title>Sign Up — InvestAI</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <style>
+    .role-card {
+      flex: 1;
+      padding: 15px;
+      border: 2px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .role-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <nav class="navbar">
+    <a href="/" class="logo">
+      <span class="logo-icon">🚀</span>
+      RiskLens-AI
+    </a>
+    <div class="nav-right">
+      <a href="/login.html" class="btn btn-secondary btn-sm">Log In</a>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <div class="auth-card glass-card">
+      <h2>Create Your Account</h2>
+      <p class="auth-subtitle">Join as a Founder or Investor and start your journey.</p>
+      
+      <form id="signup-form">
+        <div style="position: relative; width: 100%;">
+  
+  <label>Select Role</label>
+
+  <!-- Selected box -->
+  <div onclick="toggleDropdown()" id="dropdownBox"
+    style="
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      cursor: pointer;
+    ">
+    Choose your role
+  </div>
+
+  <!-- Dropdown -->
+  <div id="dropdownMenu"
+    style="
+      display: none;
+      position: absolute;
+      width: 100%;
+      margin-top: 5px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1f2937;
+      border: 1px solid rgba(255,255,255,0.2);
+    ">
+
+    <div onclick="selectRole('Founder 💡')"
+      style="padding: 12px; cursor: pointer;">
+      Founder 💡
+    </div>
+
+    <div onclick="selectRole('Investor 💼')"
+      style="padding: 12px; cursor: pointer;">
+      Investor 💼
+    </div>
+
+  </div>
+</div>
+
+<script>
+function toggleDropdown() {
+  const menu = document.getElementById("dropdownMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function selectRole(role) {
+  document.getElementById("dropdownBox").innerText = role;
+  document.getElementById("dropdownMenu").style.display = "none";
+}
+</script>
+
+        <div class="input-group">
+          <label for="signup-name">Full Name</label>
+          <input type="text" id="signup-name" class="input-field" placeholder="John Doe" required>
+        </div>
+        
+        <div class="input-group">
+          <label for="signup-email">Email Address</label>
+          <input type="email" id="signup-email" class="input-field" placeholder="john@example.com" required>
+        </div>
+        
+        <div class="input-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" class="input-field" placeholder="Minimum 6 characters" minlength="6" required>
+        </div>
+
+        <div class="input-group" id="founder-fields" style="display:none;">
+          <label for="startup-name">RiskLens-AI</label>
+          <input type="text" id="startup-name" class="input-field" placeholder="Acme Corp">
+        </div>
+
+        <div class="input-group" id="investor-fields" style="display:none;">
+          <label for="investment-budget">Investment Budget (Optional)</label>
+          <select id="investment-budget" class="input-field" style="background: rgba(255,255,255,0.05); color: inherit;">
+            <option value="" style="color: black;">Select a range</option>
+            <option value="10k-50k" style="color: black;">$10k - $50k</option>
+            <option value="50k-250k" style="color: black;">$50k - $250k</option>
+            <option value="250k+" style="color: black;">$250k+</option>
+          </select>
+        </div>
+
+        <div id="signup-error" style="display:none; color:var(--accent-red); font-size:14px; padding:10px; background:rgba(239,68,68,0.1); border-radius:var(--radius-sm);"></div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-full" id="signup-btn" style="justify-content:center; margin-top: 15px;">
+          Sign Up
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account? <a href="/login.html">Sign In</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // Role selection logic for Conditional UI
+    const roleInputs = document.querySelectorAll('input[name="role"]');
+    const roleCards = document.querySelectorAll('.role-card');
+    const founderFields = document.getElementById('founder-fields');
+    const investorFields = document.getElementById('investor-fields');
+
+    roleInputs.forEach(input => {
+      input.addEventListener('change', (e) => {
+        // Reset card styles
+        roleCards.forEach(card => {
+          card.style.borderColor = 'var(--border-glass)';
+          card.style.background = 'rgba(255, 255, 255, 0.03)';
+        });
+        
+        // Highlight selected card
+        const selectedCard = e.target.closest('.role-card');
+        selectedCard.style.borderColor = '#38bdf8'; // using a bright blue as accent
+        selectedCard.style.background = 'rgba(56, 189, 248, 0.1)';
+
+        // Toggle conditional fields
+        if(e.target.value === 'founder') {
+          founderFields.style.display = 'block';
+          investorFields.style.display = 'none';
+        } else {
+          founderFields.style.display = 'none';
+          investorFields.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

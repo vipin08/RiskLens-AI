@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — RiskLens-AI</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="orb"></div><div class="orb"></div><div class="orb"></div>
+  </div>
+  
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/dashboard.html" class="sidebar-logo">
+          <span class="logo-icon">📈</span>
+          RiskLens-AI
+        </a>
+      </div>
+      
+      <div class="sidebar-menu">
+        <a href="/dashboard.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Dashboard
+        </a>
+        <a href="/watchlist.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Watchlist
+        </a>
+        <a href="/news.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l6 6v10a2 2 0 0 1-2 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          News
+        </a>
+        <a href="/profile.html" class="menu-item active">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          Settings
+        </a>
+        <a href="/admin.html" class="menu-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+          Admin
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="upgrade-card">
+          <h4>Upgrade AI 🧠</h4>
+          <p>Unlock pro forecasting</p>
+          <button class="btn btn-primary w-full btn-sm">Try Now</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="main-wrapper">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <div style="font-weight: 600; font-size: 18px;">Profile Settings</div>
+        </div>
+        <div class="topbar-right">
+          <div class="nav-avatar" id="nav-initials-btn" onclick="window.location.href='/profile.html'"><span id="nav-initials">U</span></div>
+          <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <div class="dashboard-header" style="margin-bottom: 32px;"><h1>👤 Profile Settings</h1></div>
+
+        <div class="grid-2">
+          <div class="glass-card" style="text-align:center;">
+            <div id="profile-avatar" style="width:120px;height:120px;border-radius:50%;background:var(--gradient-primary);display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:800;margin:0 auto 16px;border:3px solid var(--border-glass);overflow:hidden;">
+              <span id="profile-initials">U</span>
+            </div>
+            <h2 id="profile-name" style="font-weight:800;">Loading...</h2>
+            <p id="profile-email" class="text-muted">---</p>
+            <p id="profile-joined" class="text-muted text-sm mt-1">Member since ---</p>
+          </div>
+
+          <div class="glass-card">
+            <h3 style="font-weight:700; margin-bottom:20px;">Update Profile</h3>
+            <form id="profile-form">
+              <div class="input-group mb-3">
+                <label for="edit-name">Full Name</label>
+                <input type="text" id="edit-name" class="input-field" placeholder="Your name">
+              </div>
+              <div class="input-group mb-3">
+                <label>Profile Photo</label>
+                <div class="file-upload">
+                  <div class="upload-icon">📷</div>
+                  <div class="upload-text">Click to change photo</div>
+                  <input type="file" id="edit-avatar" accept="image/*">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="glass-card mt-3">
+          <h3 style="font-weight:700; margin-bottom:16px;">📊 Account Stats</h3>
+          <div class="grid-3">
+            <div style="text-align:center;">
+              <div id="stat-watchlist" style="font-size:36px; font-weight:800; color:var(--accent-blue);">0</div>
+              <div class="text-muted text-sm">Watchlist Items</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="stat-portfolio" style="font-size:36px; font-weight:800; color:var(--accent-green);">0</div>
+              <div class="text-muted text-sm">Portfolio Positions</div>
+            </div>
+            <div style="text-align:center;">
+              <div id="stat-analyses" style="font-size:36px; font-weight:800; color:var(--accent-purple);">0</div>
+              <div class="text-muted text-sm">Analyses Run</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+  <script src="js/common.js"></script>
+  <script>
+    requireAuth();
+    loadProfile();
+
+    async function loadProfile() {
+      try {
+        const user = await apiGet('/api/auth/me');
+        document.getElementById('profile-name').textContent = user.name;
+        document.getElementById('profile-email').textContent = user.email;
+        document.getElementById('edit-name').value = user.name;
+        document.getElementById('profile-initials').textContent = user.name.split(' ').map(n=>n[0]).join('').toUpperCase();
+        document.getElementById('nav-initials').textContent = user.name.split(' ').map(n=>n[0]).join('').toUpperCase();
+        
+        if (user.profileImage) {
+          document.getElementById('profile-avatar').innerHTML = `<img src="${user.profileImage}" style="width:100%;height:100%;object-fit:cover;">`;
+        }
+        
+        const joined = new Date(user.createdAt);
+        document.getElementById('profile-joined').textContent = `Member since ${joined.toLocaleDateString('en-US', {month:'long', year:'numeric'})}`;
+        document.getElementById('stat-watchlist').textContent = (user.watchlist || []).length;
+        document.getElementById('stat-portfolio').textContent = (user.portfolio || []).length;
+      } catch(e) {
+        showToast('Failed to load profile', 'error');
+      }
+    }
+
+    document.getElementById('profile-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('name', document.getElementById('edit-name').value);
+      const avatar = document.getElementById('edit-avatar').files[0];
+      if (avatar) formData.append('profileImage', avatar);
+
+      try {
+        const res = await fetch('/api/auth/profile', {
+          method: 'PUT',
+          headers: { 'Authorization': 'Bearer ' + getToken() },
+          body: formData
+        });
+        if (res.ok) {
+          showToast('Profile updated!', 'success');
+          loadProfile();
+        } else {
+          showToast('Update failed', 'error');
+        }
+      } catch(e) { showToast('Update failed', 'error'); }
+    });
+  </script>
+</body>
+</html>
