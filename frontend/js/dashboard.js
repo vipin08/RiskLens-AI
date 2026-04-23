@@ -8,7 +8,7 @@ const currentUser = getUser();
 const firstName = currentUser?.name ? currentUser.name.split(' ')[0] : 'User';
 if (document.body.classList.contains('dashboard-neo') && greetingEl && dateEl) {
   greetingEl.textContent = `${getGreeting()}, ${firstName}`;
-  dateEl.textContent = 'Here is your latest portfolio and market overview.';
+  dateEl.textContent = 'Here is the latest market overview';
 } else {
   if (greetingEl) greetingEl.textContent = getGreeting();
   if (dateEl) dateEl.textContent = formatDate(new Date());

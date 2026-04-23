@@ -344,7 +344,7 @@
   display: flex;
   justify-content: space-between;
   gap: 14px;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .chainx-title {
@@ -364,12 +364,20 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
 }
 
 .chainx-search {
-  width: 260px;
+  width: clamp(240px, 26vw, 420px);
+}
+
+.chainx-actions .nav-avatar {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  aspect-ratio: 1 / 1;
 }
 
 .chainx-search .search-input {
@@ -419,6 +427,72 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   overflow: hidden;
   min-width: 0;
+}
+
+.chainx-spline-hero {
+  grid-column: 1 / -1;
+  position: relative;
+  height: clamp(340px, 44vh, 520px);
+  padding: 0;
+  border: none;
+  border-radius: 22px;
+  background: transparent;
+  box-shadow: none;
+  isolation: isolate;
+}
+
+.chainx-spline-hero::before,
+.chainx-spline-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chainx-spline-hero::before {
+  background:
+    radial-gradient(120% 58% at 50% -6%, rgba(6, 8, 19, 0.95) 0%, rgba(6, 8, 19, 0) 70%),
+    radial-gradient(100% 62% at 50% 106%, rgba(6, 8, 19, 0.96) 0%, rgba(6, 8, 19, 0) 72%);
+}
+
+.chainx-spline-hero::after {
+  border-radius: 22px;
+  border: 1px solid rgba(141, 145, 255, 0.1);
+}
+
+.chainx-spline-hero spline-viewer {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.chainx-spline-overlay {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 3;
+  width: min(94%, 900px);
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.chainx-spline-overlay h2 {
+  margin: 0;
+  font-size: clamp(44px, 5.8vw, 86px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  color: #f1f5ff;
+}
+
+.chainx-spline-overlay p {
+  margin: 8px 0 0;
+  font-size: clamp(18px, 1.8vw, 30px);
+  line-height: 1.3;
+  color: #c4c9eb;
 }
 
 .chainx-assets-card { grid-area: assets; }
@@ -682,6 +756,7 @@
   .chainx-actions {
     width: 100%;
     justify-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .chainx-panel-head {
@@ -713,6 +788,28 @@
   .chainx-stock-grid,
   .chainx-watch-grid {
     grid-template-columns: 1fr;
+  }
+
+  .chainx-spline-hero {
+    height: clamp(300px, 50vh, 430px);
+    border-radius: 16px;
+  }
+
+  .chainx-spline-hero::after {
+    border-radius: 16px;
+  }
+
+  .chainx-spline-overlay {
+    top: 18%;
+    width: min(96%, 620px);
+  }
+
+  .chainx-spline-overlay h2 {
+    font-size: clamp(34px, 9vw, 58px);
+  }
+
+  .chainx-spline-overlay p {
+    font-size: clamp(15px, 3.6vw, 22px);
   }
 }
 
