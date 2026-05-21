@@ -58,7 +58,6 @@ const startServer = (port) => {
   return server;
 };
 
-// Initialize storage then start server
 connectDB()
   .then(() => {
     startServer(START_PORT);
