@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": "1778760608089",
+      "name": "Vipin",
+      "email": "vipinsohal03@gmail.com",
+      "password": "$2a$12$A5zIgASEcPznkIkweJb6EuAuMb/a8ZcQDmkFTW2oSq9udk0QA6LZe",
+      "profileImage": "",
+      "role": "investor",
+      "watchlist": [
+        "MSFT"
+      ],
+      "portfolio": [],
+      "investmentBudget": "10k-50k",
+      "companyInvestments": [],
+      "createdAt": "2026-05-14T12:10:08.089Z"
+    },
+    {
+      "id": "1779355966496",
+      "name": "Vipin Sohal",
+      "email": "vipinsohal01@gmail.com",
+      "password": "$2a$12$sf/dSL8nBol0Z18VvNuSxeybxCbd.sJv5qgyUMbhz5.7.cYtXGWby",
+      "profileImage": "",
+      "role": "investor",
+      "watchlist": [],
+      "portfolio": [],
+      "investmentBudget": "10k-50k",
+      "companyInvestments": [],
+      "createdAt": "2026-05-21T09:32:46.496Z"
+    }
+  ]
+}

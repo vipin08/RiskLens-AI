@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RiskLens-AI Dashboard — Real-time market overview and stock analysis">
+  <title>Dashboard — RiskLens-AI</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.4/build/spline-viewer.js"></script>
+  <style>
+    /* Hide Spline viewer to remove the blue placeholder box */
+    spline-viewer { display: none !important; }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+</head>
+
+<body class="dashboard-neo">
+  <div class="bg-animation">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <div class="chainx-shell">
+    <aside class="chainx-sidebar">
+      <div class="chainx-brand">
+        <span class="logo-icon">✦</span>
+        <span>RiskLens</span>
+      </div>
+
+      <nav class="chainx-nav">
+        <a href="/dashboard.html" class="chainx-nav-item active"><span>▦</span>Dashboard</a>
+        <a href="/assistant.html" class="chainx-nav-item"><span>🤖</span>AI Assistant</a>
+        <a href="/portfolio.html" class="chainx-nav-item"><span>💼</span>Portfolio</a>
+        <a href="/watchlist.html" class="chainx-nav-item"><span>☆</span>Watchlist</a>
+        <a href="#" class="chainx-nav-item" id="nav-startups" style="display:none;"><span>🚀</span>Startups Directory</a>
+        <a href="/founder.html" class="chainx-nav-item" id="nav-founder" style="display:none;"><span>💡</span>My Organisation</a>
+        <a href="/news.html" class="chainx-nav-item"><span>📰</span>News</a>
+        <a href="/profile.html" class="chainx-nav-item"><span>⚙</span>Settings</a>
+        <a href="/admin.html" class="chainx-nav-item"><span>◧</span>Admin</a>
+      </nav>
+
+      <div class="chainx-upgrade">
+        <p>Unlock all AI features</p>
+        <button class="btn btn-primary btn-sm w-full" onclick="window.location.href='/pricing.html'">Upgrade & Try Now</button>
+      </div>
+    </aside>
+
+    <div class="chainx-main">
+      <div class="ticker-banner chainx-marquee">
+        <div class="ticker-track" id="dashboard-ticker-track">
+          <div class="ticker-item"><span class="symbol">AAPL</span><span class="t-price">$198.54</span><span class="change positive">+1.23%</span></div>
+          <div class="ticker-item"><span class="symbol">GOOGL</span><span class="t-price">$142.72</span><span class="change positive">+0.87%</span></div>
+          <div class="ticker-item"><span class="symbol">MSFT</span><span class="t-price">$378.91</span><span class="change negative">-0.45%</span></div>
+          <div class="ticker-item"><span class="symbol">TSLA</span><span class="t-price">$248.33</span><span class="change positive">+3.12%</span></div>
+          <div class="ticker-item"><span class="symbol">NVDA</span><span class="t-price">$495.22</span><span class="change positive">+2.34%</span></div>
+          <div class="ticker-item"><span class="symbol">META</span><span class="t-price">$356.78</span><span class="change negative">-0.22%</span></div>
+          <div class="ticker-item"><span class="symbol">AMZN</span><span class="t-price">$185.60</span><span class="change positive">+0.96%</span></div>
+
+          <div class="ticker-item"><span class="symbol">AAPL</span><span class="t-price">$198.54</span><span class="change positive">+1.23%</span></div>
+          <div class="ticker-item"><span class="symbol">GOOGL</span><span class="t-price">$142.72</span><span class="change positive">+0.87%</span></div>
+          <div class="ticker-item"><span class="symbol">MSFT</span><span class="t-price">$378.91</span><span class="change negative">-0.45%</span></div>
+          <div class="ticker-item"><span class="symbol">TSLA</span><span class="t-price">$248.33</span><span class="change positive">+3.12%</span></div>
+          <div class="ticker-item"><span class="symbol">NVDA</span><span class="t-price">$495.22</span><span class="change positive">+2.34%</span></div>
+          <div class="ticker-item"><span class="symbol">META</span><span class="t-price">$356.78</span><span class="change negative">-0.22%</span></div>
+          <div class="ticker-item"><span class="symbol">AMZN</span><span class="t-price">$185.60</span><span class="change positive">+0.96%</span></div>
+        </div>
+      </div>
+
+      <header class="chainx-topbar">
+        <div>
+          <h1 id="greeting" class="chainx-title">Dashboard</h1>
+          <p id="current-date" class="chainx-subtitle">Get update of your assets today.</p>
+        </div>
+
+        <div class="chainx-actions">
+          <div class="search-container chainx-search">
+            <span class="search-icon">⌕</span>
+            <input type="text" class="search-input" id="stock-search" placeholder="Search stock..." autocomplete="off">
+            <div class="search-results" id="search-results"></div>
+          </div>
+          <div class="nav-avatar" id="nav-avatar" onclick="window.location.href='/profile.html'" title="Profile">
+            <span id="nav-initials">U</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="chainx-grid">
+        <section class="chainx-card chainx-spline-hero">
+          
+          <spline-viewer url="https://prod.spline.design/hcVF832p1SrQFYns/scene.splinecode" style="width: 100%; height: 100%; display: block;"></spline-viewer>
+        </section>
+
+        <section class="chainx-card chainx-market-panel">
+          <div class="chainx-panel-head">
+            <h3 class="chainx-subhead">Market Overview</h3>
+            <div class="market-tabs chainx-market-tabs">
+              <button class="market-tab active" data-trend="most-active" onclick="loadMarket('most-active', this)">Most Active</button>
+              <button class="market-tab" data-trend="gainers" onclick="loadMarket('gainers', this)">Gainers</button>
+              <button class="market-tab" data-trend="losers" onclick="loadMarket('losers', this)">Losers</button>
+            </div>
+          </div>
+
+          <div id="market-grid" class="stock-grid chainx-stock-grid">
+            <div class="glass-card" style="text-align:center; padding:40px; grid-column: 1 / -1;">
+              <div class="loading-spinner"></div>
+              <p class="loading-text mt-2">Loading market data...</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chainx-card chainx-startups-panel" id="startups-panel" style="display:none;">
+          <div class="chainx-panel-head" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <h3 class="chainx-subhead" style="margin: 0;">Startups Directory</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; flex: 1; justify-content: flex-end;">
+              <div class="search-container chainx-search" style="margin: 0; min-width: 200px; max-width: 300px;">
+                <span class="search-icon">⌕</span>
+                <input type="text" class="search-input" id="startup-directory-search" placeholder="Search companies..." autocomplete="off">
+              </div>
+              <select id="startup-industry-filter" style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 8px 12px; border-radius: 8px; outline: none; font-size: 14px; cursor: pointer; transition: all 0.3s ease;">
+                <option value="">All Industries</option>
+              </select>
+              <select id="startup-stage-filter" style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 8px 12px; border-radius: 8px; outline: none; font-size: 14px; cursor: pointer; transition: all 0.3s ease;">
+                <option value="">All Stages</option>
+              </select>
+            </div>
+          </div>
+          <div id="startups-grid" class="stock-grid chainx-stock-grid">
+            <div class="glass-card" style="text-align:center; padding:40px; grid-column: 1 / -1;">
+              <div class="loading-spinner"></div>
+              <p class="loading-text mt-2">Loading startups...</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="chainx-card chainx-investments-panel" id="investments-panel" style="display:none;">
+          <div class="chainx-panel-head">
+            <h3 class="chainx-subhead">My Investments</h3>
+            <button class="btn btn-sm btn-primary" onclick="addInvestmentPrompt()">+ Add Investment</button>
+          </div>
+          <div id="investments-grid" class="stock-grid chainx-stock-grid">
+            <div class="empty-state glass-card" style="grid-column: 1 / -1;">
+              <p>No investments added yet.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Founder teaser card — links to the dedicated Founder Hub page -->
+        <section class="chainx-card" id="founder-panel" style="display:none; grid-column: 1 / -1; background: linear-gradient(135deg, rgba(109,74,255,0.12), rgba(16,185,129,0.07)); border-color: rgba(109,74,255,0.25);">
+          <div style="display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+            <div style="font-size:48px;">💡</div>
+            <div style="flex:1;">
+              <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">Your Organisation Hub is ready</h3>
+              <p style="color:#94a3b8; font-size:14px; margin-bottom:14px;">View investor analytics, live growth metrics, confidential financials, and push updates — all in one place.</p>
+              <a href="/founder.html" class="btn btn-primary btn-sm">Open My Organisation Hub →</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="chainx-card chainx-watch-panel">
+          <h3 class="chainx-subhead">Your Watchlist</h3>
+          <div id="quick-watchlist" class="stock-grid chainx-watch-grid">
+            <div class="empty-state glass-card" style="grid-column: 1 / -1;">
+              <div class="empty-icon">📋</div>
+              <p>Your watchlist is empty. Search and add stocks above.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+
+
+  <script src="js/common.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+
+</html>
